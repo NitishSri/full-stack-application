@@ -5,8 +5,10 @@ public class UserProfileResponse {
 	private String username;
 	private String firstname;
 	private String lastname;
+	private String password;
 	private boolean invalidCredentials;
 	private boolean userExists;
+	private String token;
 
 	public Long getId() {
 		return id;
@@ -54,6 +56,22 @@ public class UserProfileResponse {
 
 	public void setUserExists(boolean userExists) {
 		this.userExists = userExists;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

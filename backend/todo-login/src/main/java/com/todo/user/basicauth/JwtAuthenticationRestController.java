@@ -31,7 +31,7 @@ public class JwtAuthenticationRestController {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
+	
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 

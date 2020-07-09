@@ -8,10 +8,9 @@ class AuthenticationService {
         })
     }
 
-    loginUser(username, password) {
-        console.log('loginuser')
-        let basicAuthenticationHeader = 'Basic ' + window.btoa(username + ":" + password)
+    loginUser(username, token) {
         sessionStorage.setItem("authenticatedUser", username)
+        let basicAuthenticationHeader = 'Bearer ' + token
         this.setupAxiosInterceptor(basicAuthenticationHeader)
     }
 
