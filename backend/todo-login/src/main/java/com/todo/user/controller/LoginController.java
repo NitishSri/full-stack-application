@@ -38,6 +38,9 @@ public class LoginController {
 	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<UserProfileResponse> login(@RequestBody LoginRequest request) {
 		UserProfileResponse userProfileResponse = service.login(request);
+		if(userProfileResponse.isInvalidCredentials()) {
+			return ResponseEntity.ok().body(userProfileResponse);
+		}
 		authenticate(request.getUsername(), request.getPassword());
 		final UserDetails userDetails = service.loadUserByUsername(userProfileResponse.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
