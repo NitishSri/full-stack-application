@@ -1,6 +1,15 @@
 version: '3'
 services:
 
+   todoappfrontend:
+      stdin_open: true
+      build:
+         context: frontend\todo-app
+         dockerfile: Dockerfile
+      ports:
+        - 3000:3000
+      networks:
+      - my-network
    eurekaserver:
       build:
          context: backend\eureka-server
