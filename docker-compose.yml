@@ -1,0 +1,48 @@
+version: '3'
+services:
+
+   eurekaserver:
+      build:
+         context: backend\eureka-server
+         dockerfile: Dockerfile
+      ports:
+      - 8761:8761
+      networks:
+      - my-network
+      restart: always
+      
+   todologinservice:
+      build:
+         context: backend\todo-login
+         dockerfile: Dockerfile
+      restart: always
+      environment:
+         EUREKA_HOST: eurekaserver
+         EUREKA_PORT: 8761
+      ports:
+      - 9091:9091
+      networks:
+      - my-network
+      depends_on:
+      - eurekaserver    
+      
+   todoappservice:
+      build:
+         context: backend\TodoApp
+         dockerfile: Dockerfile
+      restart: always
+      environment:
+         EUREKA_HOST: eurekaserver
+         EUREKA_PORT: 8761
+      ports:
+      - 9090:9090
+      networks:
+      - my-network
+      depends_on:
+      - eurekaserver
+         
+volumes:
+   mysql-database-data-volume:
+networks:
+   my-network:
+      driver: bridge

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.todoapp.application.basicauth.JWTUserDetails;
 
-@FeignClient(url = "http://localhost:9091", name = "login-service")
+@FeignClient(name = "todo-login-app")
 public interface LoginProxyService {
 
 	@GetMapping("/loaduser")

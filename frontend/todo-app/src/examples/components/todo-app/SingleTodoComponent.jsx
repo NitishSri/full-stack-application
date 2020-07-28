@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import moment from 'moment'
-import AuthenticationService from './AuthenticationService.js'
+import AuthenticationService from '../../api/AuthenticationService.js'
 import TodoDataService from '../../api/TodoDataService'
 
 class SingleTodoComponent extends Component {

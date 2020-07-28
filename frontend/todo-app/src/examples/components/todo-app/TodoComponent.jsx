@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TodoDataService from './../../api/TodoDataService.js'
-import AuthenticationService from './AuthenticationService.js'
+import AuthenticationService from '../../api/AuthenticationService.js'
 import moment from 'moment'
 
 class TodoComponent extends Component {
