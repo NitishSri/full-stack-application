@@ -1,0 +1,2 @@
+ALTER TABLE userprofile ALTER COLUMN lastname VARCHAR (500)
+
