@@ -39,8 +39,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable().exceptionHandling()
 				.authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/register", "/login", "/loaduser", "/authenticate", "/swagger-ui.html#/").permitAll().anyRequest()
-				.authenticated();
+				.antMatchers("/register", "/login", "/loaduser", "/authenticate", "/swagger-ui.html#/").permitAll()
+				.anyRequest().authenticated();
 
 		httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -51,7 +51,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity webSecurity) throws Exception {
 		webSecurity.ignoring().antMatchers(HttpMethod.POST, authenticationPath).antMatchers(HttpMethod.OPTIONS, "/**")
-				.and().ignoring().antMatchers(HttpMethod.GET, "/", "/login" // Other Stuff You want to Ignore
-				).and().ignoring().antMatchers("/h2-console/**/**");// Should not be in Production!
+				.and().ignoring().antMatchers(HttpMethod.GET, "/", "/login", "/v2/api-docs", "/configuration/ui",
+						"/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**" ).and().ignoring().antMatchers("/h2-console/**/**");
 	}
 }

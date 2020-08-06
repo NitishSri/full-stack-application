@@ -30,6 +30,13 @@ class AuthenticationService {
         return user
     }
 
+    register(firstname, lastname, username, password){
+        console.log(username)
+        return axios.post('http://localhost:9091/register', {
+            firstname: firstname, lastname: lastname, username: username, password: password
+        })
+    }
+
     setupAxiosInterceptor(basicAuthenticationHeader) {
         console.log(basicAuthenticationHeader)
         axios.interceptors.request.use(

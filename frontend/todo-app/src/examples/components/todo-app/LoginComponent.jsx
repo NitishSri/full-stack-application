@@ -16,6 +16,7 @@ class LoginComponent extends Component {
 
         this.handleChangedEvent = this.handleChangedEvent.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
+        this.registerClicked = this.registerClicked.bind(this)
     }
 
     handleChangedEvent(event) {
@@ -45,19 +46,24 @@ class LoginComponent extends Component {
         // }
     }
 
+    registerClicked(){
+        this.props.history.push("/register")
+    }
+
 
 
     render() {
 
         return (
             <div>
-                <h3>Login</h3>
+                <h3>Todo Application</h3>
                 <div className="container">
                     {this.state.inValidLogin && <div className="alert alert-warning">Username and password is not valid !!</div>}
                     {this.state.serviceError && <div className="alert alert-warning">Someting went wrong with the login service</div>}
-                        Username : <input type="text" onChange={this.handleChangedEvent} name="username" value={this.state.username} />
-                        Password : <input type="password" onChange={this.handleChangedEvent} name="password" value={this.state.password} />
-                        <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                    <div>Username : <input type="text" className="un" onChange={this.handleChangedEvent} name="username" value={this.state.username} /></div>
+                    <div>Password : <input type="password" className="pass" onChange={this.handleChangedEvent} name="password" value={this.state.password} /></div>
+                    <button className="submit  btn-success btn" align="center" onClick={this.loginClicked}>Login</button>
+                    <button className="submit btn-success btn" onClick={this.registerClicked} align="center">Sign Up</button>
                 </div>
             </div>
 

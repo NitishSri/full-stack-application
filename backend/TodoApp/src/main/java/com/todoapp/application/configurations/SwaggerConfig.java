@@ -18,6 +18,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+	public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
+    
 	List<VendorExtension> vendorExtensions = new ArrayList<>();
 
 	Contact contact = new Contact("Nitish Srivastava", "http://nitish.com", "nitish91.sri@gmail.com");
