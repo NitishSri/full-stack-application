@@ -57,7 +57,6 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-
 .pass {
     width: 76%;
     color: rgb(38, 50, 56);
@@ -96,4 +95,55 @@ body {
     margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    color: slategray;
+}
+
+.table_class {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 2rem 0rem 0rem 0rem;
+    max-width: 1100px;
+}
+
+.table-cell {
+    box-sizing: border-box;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0.8em 1.2em;
+    overflow: hidden;
+    list-style-type: none;
+    outline: 1px solid #ddd;
+    text-align: center;
+    font-weight: 300;
+    margin: {
+        top: 1px;
+        left: 1px;
+    }
+}
+
+/* Table columns
+  ================================== */
+
+.table-cell {
+    width: calc(33.33% - 1px);
+    &.cell-feature {
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+a.btn {
+    border: 2px solid;
+    padding: .6rem .9rem .6rem .9rem;
+    font-weight: 400;
+    text: {
+        transform: uppercase;
+        decoration: none;
+    }
 }

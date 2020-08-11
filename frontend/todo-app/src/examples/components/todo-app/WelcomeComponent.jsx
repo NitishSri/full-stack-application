@@ -22,7 +22,22 @@ class WelcomeComponent extends Component {
             <>
                 <h1>Welcome !!</h1>
                 <div className="container">{this.state.errorMessage}</div>
-                <div className="container">Welcome {this.props.match.params.name}. To go to the todos You can click <Link to="/todos">here</Link></div>
+                <div className="container">Welcome. What would like to do here ?</div>
+
+                <div class="table_class">
+                    <div class="table-cell">
+                        <h3>Would you like to add Notes</h3>
+                        <Link class="btn" to="/todos">here</Link>
+                    </div>
+                    <div class="table-cell plattform">
+                        <h3>Use Comparer</h3>
+                        <a href="" class="btn">Comparer</a>
+                    </div>
+                    <div class="table-cell enterprise">
+                        <h3>Free Space</h3>
+                        <a href="" class="btn">Try me</a>
+                    </div>
+                </div>
             </>
         )
 
