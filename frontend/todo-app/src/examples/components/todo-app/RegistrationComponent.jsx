@@ -56,11 +56,9 @@ class RegistrationComponent extends Component {
                     AuthenticationService.validateCredentials(values.username, values.password).then(
                         response => {
                             if (response.data.invalidCredentials === true) {
-                                console.log("if")
                                 this.setState({ inValidLogin: true })
                                 this.setState({ serviceError: false })
                             } else {
-                                console.log("else")
                                 AuthenticationService.loginUser(values.username, response.data.token)
                                 this.props.history.push(`/welcome/${response.data.firstname}`)
                             }

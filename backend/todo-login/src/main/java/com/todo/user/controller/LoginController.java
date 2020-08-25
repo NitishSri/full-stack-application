@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,17 +29,17 @@ public class LoginController {
 
 	@Autowired
 	private LoginService service;
-	
+
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<UserProfileResponse> login(@RequestBody LoginRequest request) {
 		UserProfileResponse userProfileResponse = service.login(request);
-		if(userProfileResponse.isInvalidCredentials()) {
+		if (userProfileResponse.isInvalidCredentials()) {
 			return ResponseEntity.ok().body(userProfileResponse);
 		}
 		authenticate(request.getUsername(), request.getPassword());
@@ -52,6 +53,11 @@ public class LoginController {
 	@GetMapping(path = "/loaduser", produces = "application/json")
 	public ResponseEntity<UserDetails> loadUser(@RequestParam String username) {
 		return ResponseEntity.ok().body(service.loadUserByUsername(username));
+	}
+
+	@GetMapping(path = "/user/{username}", produces = "application/json")
+	public ResponseEntity<UserProfileResponse> loadUserInfo(@PathVariable String username) {
+		return ResponseEntity.ok().body(service.loadUserInfo(username));
 	}
 
 	private void authenticate(String username, String password) {

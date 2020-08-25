@@ -31,7 +31,7 @@ class LoginComponent extends Component {
                     this.setState({ serviceError: false })
                 } else {
                     AuthenticationService.loginUser(this.state.username, response.data.token)
-                    this.props.history.push(`/welcome/${response.data.firstname}`)
+                    this.props.history.push("/welcome")
                 }
             }
         ).catch(
