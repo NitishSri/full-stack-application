@@ -8,5 +8,7 @@ import com.todo.user.dto.UserProfileResponse;
 public interface LoginService extends UserDetailsService{
 
 	public UserProfileResponse login(LoginRequest request);
+	
+	public UserProfileResponse loadUserInfo(String username);
 
 }

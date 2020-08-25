@@ -62,4 +62,14 @@ public class LoginServiceImpl implements LoginService {
 		return null;
 	}
 
+	@Override
+	public UserProfileResponse loadUserInfo(String username) {
+		Optional<UserProfile> userProfile = registerRepository.findByUsername(username);
+		if (userProfile.isPresent()) {
+			ModelMapper modelMapper = new ModelMapper();
+			return modelMapper.map(userProfile.get(), UserProfileResponse.class);
+		}
+		return null;
+	}
+
 }
