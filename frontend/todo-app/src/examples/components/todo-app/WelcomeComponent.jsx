@@ -31,7 +31,7 @@ class WelcomeComponent extends Component {
                     </div>
                     <div class="table-cell plattform">
                         <h3>Use Comparer</h3>
-                        <a href="" class="btn">Comparer</a>
+                        <Link class="btn" to="/comparer">Comparer</Link>
                     </div>
                     <div class="table-cell enterprise">
                         <h3>Free Space</h3>
@@ -41,7 +41,7 @@ class WelcomeComponent extends Component {
             </>
         )
 
-
+        
     }
 
     retrieveMessage() {

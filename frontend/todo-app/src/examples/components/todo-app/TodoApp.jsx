@@ -12,6 +12,8 @@ import LogoutComponent from './LogoutComponent'
 import WelcomeComponent from './WelcomeComponent'
 import SingleTodoComponent from './SingleTodoComponent'
 import RegistrationComponent from './RegistrationComponent'
+import ComparerHomePage from '../comparer/ComparerHomePage'
+import ComparerTopicResultPage from '../comparer/ComparerTopicResultPage'
 class TodoApp extends Component {
 
     render() {
@@ -28,6 +30,8 @@ class TodoApp extends Component {
                             <AuthenticatedRoute path="/welcome" component={WelcomeComponent} ></AuthenticatedRoute>
                             <AuthenticatedRoute path="/todos/:id" component={SingleTodoComponent} ></AuthenticatedRoute>
                             <AuthenticatedRoute path="/todos" component={TodoComponent} ></AuthenticatedRoute>
+                            <AuthenticatedRoute path="/comparer" component={ComparerHomePage} ></AuthenticatedRoute>
+                            <AuthenticatedRoute path="/threads" component={ComparerTopicResultPage} ></AuthenticatedRoute>
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} ></AuthenticatedRoute>                           
                             <Route component={ErrorComponent} ></Route>
                         </Switch>

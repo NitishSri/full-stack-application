@@ -55,6 +55,7 @@ class HeaderComponent extends Component {
 
                         {userLoggedIn && <li><Link to="/welcome" className="nav-link header">Home</Link></li>}
                         {userLoggedIn && <li><Link to="/todos" className="nav-link header">Todos</Link></li>}
+                        {userLoggedIn && <li><Link to="/comparer" className="nav-link header">Comparer</Link></li>}
 
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">               
