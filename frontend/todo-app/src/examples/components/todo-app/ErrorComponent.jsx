@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function ErrorComponent() {
-    return <div>URL is not valid</div>
+  return <div>URL is not valid</div>;
 }
 
-export default ErrorComponent
+export default ErrorComponent;
