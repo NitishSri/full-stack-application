@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Updates;
 import com.nitish.application.entity.ThreadAuthorMapping;
 import com.nitish.application.repository.ThreadAuthorMappingRepository;
 import com.nitish.application.resourceobject.CommentsRO;
-import com.nitish.application.resourceobject.DeleteCommentRO;
 import com.nitish.application.resourceobject.PostCommentRO;
 import com.nitish.application.resourceobject.ThreadComments;
 import com.nitish.application.service.ThreadTopicCommentsService;
@@ -64,6 +64,14 @@ public class ThreadTopicCommentsServiceImpl implements ThreadTopicCommentsServic
 		Gson gson = new Gson();
 		String jsonDocument = gson.toJson(comment);
 		docs.insertOne(Document.parse(jsonDocument));
+		List<ThreadAuthorMapping> threadFounds = repository.findBythreadTopicName(comment.getThreadName());
+		for (ThreadAuthorMapping thread : threadFounds) {
+			int comments = thread.getTotalComments();
+			thread.setTotalComments(comments + 1);
+			repository.save(thread);
+			break;
+		}
+
 		return comment.getThreadName();
 	}
 
@@ -71,6 +79,35 @@ public class ThreadTopicCommentsServiceImpl implements ThreadTopicCommentsServic
 	public String deleteComment(String threadName, String commentID) {
 		MongoCollection<Document> docs = mongoTemplate.getCollection(threadName);
 		docs.deleteOne(eq("commentID", commentID));
+		List<ThreadAuthorMapping> threadFounds = repository.findBythreadTopicName(threadName);
+		for (ThreadAuthorMapping thread : threadFounds) {
+			int comments = thread.getTotalComments();
+			thread.setTotalComments(comments - 1);
+			repository.save(thread);
+			break;
+		}
+		return threadName;
+	}
+
+	@Override
+	public String likeComment(String threadName, String commentID, String author) {
+		MongoCollection<Document> docs = mongoTemplate.getCollection(threadName);
+		Document doc = docs.find(eq("commentID", commentID)).first();
+		Gson gson = new Gson();
+		CommentsRO comment = gson.fromJson(doc.toJson(), CommentsRO.class);
+		int like = comment.getCommentLike() + 1;
+		docs.updateOne(eq("commentID", commentID), Updates.set("commentLike", like));
+		return threadName;
+	}
+
+	@Override
+	public String dislikeComment(String threadName, String commentID, String author) {
+		MongoCollection<Document> docs = mongoTemplate.getCollection(threadName);
+		Document doc = docs.find(eq("commentID", commentID)).first();
+		Gson gson = new Gson();
+		CommentsRO comment = gson.fromJson(doc.toJson(), CommentsRO.class);
+		int dislike = comment.getCommentDislike() + 1;
+		docs.updateOne(eq("commentID", commentID), Updates.set("commentDislike", dislike));
 		return threadName;
 	}
 

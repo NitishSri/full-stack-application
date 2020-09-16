@@ -76,6 +76,32 @@ class ComparerTopicResultPage extends Component {
       }));
   }
 
+  likeComment = (loggedUser, threadName, commentID) => {
+    const history = createHistory();
+    ComparerThreadService.likeComment(loggedUser, threadName, commentID)
+      .then((response) => {
+        history.go(0);
+      })
+      .catch(() => this.setState({
+        serviceError: true,
+        message: 'Oops something went wrong with the Like Comment service',
+      }));
+
+  }
+
+  dislikeComment = (loggedUser, threadName, commentID) => {
+    const history = createHistory();
+    ComparerThreadService.dislikeComment(loggedUser, threadName, commentID)
+      .then((response) => {
+        history.go(0);
+      })
+      .catch(() => this.setState({
+        serviceError: true,
+        message: 'Oops something went wrong with the Dislike Comment service',
+      }));
+
+  }
+
   render() {
     if (!this.state.responseData) {
       return (<div>loading</div>);
@@ -95,7 +121,9 @@ class ComparerTopicResultPage extends Component {
         }
         const { threadName } = this.state.responseData.comments[i];
         const { commentID } = this.state.responseData.comments[i];
-        commentTopicOne.push(<div><textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea>{sameUser && <div><button className="btn-success btn" onClick={() => this.deleteComment(threadName, commentID)}>Delete</button></div>}</div>);
+        const { commentLike } = this.state.responseData.comments[i];
+        const { commentDislike } = this.state.responseData.comments[i];
+        commentTopicOne.push(<div><a href='' onClick={() => this.likeComment(loggedUser, threadName, commentID)}>Like ({commentLike})</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='' onClick={() => this.dislikeComment(loggedUser, threadName, commentID)}>Dislike ({commentDislike})</a>&nbsp;&nbsp;&nbsp;&nbsp;{sameUser && <a href='' onClick={() => this.deleteComment(threadName, commentID)}>Delete</a>}<textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea></div>);
         commentTopicTwo.push(<div><textarea className="un" name="commentsTwo" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentTwo)}</textarea></div>);
       }
     }

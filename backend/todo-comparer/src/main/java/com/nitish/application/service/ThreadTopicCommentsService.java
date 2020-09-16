@@ -11,6 +11,10 @@ public interface ThreadTopicCommentsService {
 	
 	public String deleteComment(String threadName, String commentID);
 	
+	public String likeComment(String threadName, String commentID, String author);
+	
+	public String dislikeComment(String threadName, String commentID, String author);
+	
 	
 
 }

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nitish.application.resourceobject.DeleteCommentRO;
 import com.nitish.application.resourceobject.PostCommentRO;
 import com.nitish.application.resourceobject.ThreadComments;
 import com.nitish.application.service.ThreadTopicCommentsService;
@@ -37,6 +37,20 @@ public class ThreadTopicCommentsController {
 	@DeleteMapping(path = "/delete/comment/{threadName}/{commentID}")
 	public String deleteComment(@PathVariable String threadName, @PathVariable String commentID) {
 		return service.deleteComment(threadName, commentID);
+
+	}
+
+	@PutMapping(path = "/like/comment/{author}/{threadName}/{commentID}")
+	public String likeComment(@PathVariable String author, @PathVariable String threadName,
+			@PathVariable String commentID) {
+		return service.likeComment(threadName, commentID, author);
+
+	}
+
+	@PutMapping(path = "/dislike/comment/{author}/{threadName}/{commentID}")
+	public String dislikeComment(@PathVariable String author, @PathVariable String threadName,
+			@PathVariable String commentID) {
+		return service.dislikeComment(threadName, commentID, author);
 
 	}
 

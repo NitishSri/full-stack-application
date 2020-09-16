@@ -20,6 +20,14 @@ class ComparerThreadService {
   deleteComment(threadName, commentID) {
     return axios.delete(`http://localhost:9093/delete/comment/${threadName}/${commentID}`);
   }
+
+  likeComment(loggedUser, threadName, commentID) {
+    return axios.put(`http://localhost:9093/like/comment/${loggedUser}/${threadName}/${commentID}`);
+  }
+
+  dislikeComment(loggedUser, threadName, commentID) {
+    return axios.put(`http://localhost:9093/dislike/comment/${loggedUser}/${threadName}/${commentID}`);
+  }
 }
 
 export default new ComparerThreadService();
