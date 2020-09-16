@@ -3,7 +3,7 @@ package com.nitish.application.resourceobject;
 public class DeleteCommentRO {
 
 	private String threadName;
-	private String commendID;
+	private String commentID;
 
 	public String getThreadName() {
 		return threadName;
@@ -13,12 +13,12 @@ public class DeleteCommentRO {
 		this.threadName = threadName;
 	}
 
-	public String getCommendID() {
-		return commendID;
+	public String getCommentID() {
+		return commentID;
 	}
 
-	public void setCommendID(String commendID) {
-		this.commendID = commendID;
+	public void setCommentID(String commentID) {
+		this.commentID = commentID;
 	}
 
 }

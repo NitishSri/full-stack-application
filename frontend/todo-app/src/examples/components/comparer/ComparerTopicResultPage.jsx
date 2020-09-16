@@ -64,18 +64,38 @@ class ComparerTopicResultPage extends Component {
       }));
   }
 
+  deleteComment = (threadName, commentID) => {
+    const history = createHistory();
+    ComparerThreadService.deleteComment(threadName, commentID)
+      .then((response) => {
+        history.go(0);
+      })
+      .catch(() => this.setState({
+        serviceError: true,
+        message: 'Oops something went wrong with the Delete Comment service',
+      }));
+  }
+
   render() {
     if (!this.state.responseData) {
       return (<div>loading</div>);
     }
     const commentsLength = this.state.responseData.comments.length;
-
+    const loggedUser = sessionStorage.getItem('authenticatedUser');
+    let sameUser = false;
 
     if (commentsLength > 0) {
       var commentTopicOne = [];
       var commentTopicTwo = [];
       for (var i = 0; i < this.state.responseData.comments.length; i++) {
-        commentTopicOne.push(<div><textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea></div>);
+        if (loggedUser === this.state.responseData.comments[i].commentAuthor) {
+          sameUser = true;
+        } else {
+          sameUser = false;
+        }
+        const { threadName } = this.state.responseData.comments[i];
+        const { commentID } = this.state.responseData.comments[i];
+        commentTopicOne.push(<div><textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea>{sameUser && <div><button className="btn-success btn" onClick={() => this.deleteComment(threadName, commentID)}>Delete</button></div>}</div>);
         commentTopicTwo.push(<div><textarea className="un" name="commentsTwo" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentTwo)}</textarea></div>);
       }
     }

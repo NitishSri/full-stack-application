@@ -34,9 +34,9 @@ public class ThreadTopicCommentsController {
 
 	}
 
-	@DeleteMapping(path = "/delete/comment", consumes = "application/json", produces = "application/json")
-	public String deleteComment(@Valid @RequestBody DeleteCommentRO comment) {
-		return service.deleteComment(comment);
+	@DeleteMapping(path = "/delete/comment/{threadName}/{commentID}")
+	public String deleteComment(@PathVariable String threadName, @PathVariable String commentID) {
+		return service.deleteComment(threadName, commentID);
 
 	}
 

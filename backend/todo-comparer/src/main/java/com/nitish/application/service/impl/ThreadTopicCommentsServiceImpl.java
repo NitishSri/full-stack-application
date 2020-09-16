@@ -68,10 +68,10 @@ public class ThreadTopicCommentsServiceImpl implements ThreadTopicCommentsServic
 	}
 
 	@Override
-	public String deleteComment(DeleteCommentRO comment) {
-		MongoCollection<Document> docs = mongoTemplate.getCollection(comment.getThreadName());
-		docs.deleteOne(eq("commentID", comment.getCommendID()));
-		return comment.getThreadName();
+	public String deleteComment(String threadName, String commentID) {
+		MongoCollection<Document> docs = mongoTemplate.getCollection(threadName);
+		docs.deleteOne(eq("commentID", commentID));
+		return threadName;
 	}
 
 }

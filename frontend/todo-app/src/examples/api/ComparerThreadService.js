@@ -16,6 +16,10 @@ class ComparerThreadService {
   postComment(threadComments) {
     return axios.post('http://localhost:9093/post/comment', threadComments);
   }
+
+  deleteComment(threadName, commentID) {
+    return axios.delete(`http://localhost:9093/delete/comment/${threadName}/${commentID}`);
+  }
 }
 
 export default new ComparerThreadService();
