@@ -1,11 +1,17 @@
 package com.nitish.application.service;
 
+import com.nitish.application.resourceobject.DeleteCommentRO;
+import com.nitish.application.resourceobject.PostCommentRO;
 import com.nitish.application.resourceobject.ThreadComments;
 
 public interface ThreadTopicCommentsService {
 	
 	public ThreadComments fetchThreadComments(String threadName);
 	
-	public String postComment(ThreadComments comment);
+	public String postComment(PostCommentRO comment);
+	
+	public String deleteComment(DeleteCommentRO comment);
+	
+	
 
 }

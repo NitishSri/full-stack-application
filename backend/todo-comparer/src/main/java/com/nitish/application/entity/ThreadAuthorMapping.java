@@ -31,6 +31,10 @@ public class ThreadAuthorMapping {
 	@UpdateTimestamp
 	private LocalDateTime updatedDate;
 
+	private String displayName;
+
+	private int totalComments;
+
 	public String getThreadTopicName() {
 		return threadTopicName;
 	}
@@ -81,6 +85,22 @@ public class ThreadAuthorMapping {
 
 	public void setTopicTwo(String topicTwo) {
 		this.topicTwo = topicTwo;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public int getTotalComments() {
+		return totalComments;
+	}
+
+	public void setTotalComments(int totalComments) {
+		this.totalComments = totalComments;
 	}
 
 }

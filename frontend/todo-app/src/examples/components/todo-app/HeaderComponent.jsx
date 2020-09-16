@@ -61,8 +61,8 @@ class HeaderComponent extends Component {
             {!userLoggedIn && <li><Link to="/login" className="nav-link header">Login</Link></li>}
             {userLoggedIn && <div class="dropdown">
               {/* <button class="dropbtn">{this.state.firstname} {this.state.lastname}</button> */}
-              <button class="dropbtn">Profile</button>
-              <div class="dropdown-content">
+              <button className="dropbtn">Profile</button>
+              <div className="dropdown-content">
                 <Link to="/logout" onClick={AuthenticationService.logout} className="nav-link header">Logout</Link>
               </div>
             </div>}

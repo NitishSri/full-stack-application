@@ -62,8 +62,7 @@ class ComparerHomePage extends Component {
       topicOne: this.state.topicOne,
       topicTwo: this.state.topicTwo,
       authorUsername: username,
-    }).then
-    ((response) => {
+    }).then((response) => {
       this.setState({
         noresult: response.data.noresult,
       });
@@ -86,23 +85,6 @@ class ComparerHomePage extends Component {
       pathname: '/threads',
       state: { threadName },
     });
-
-    /*
-     * ComparerThreadService.openThread(threadName).then
-     *     (response => {
-     *         this.props.history.push({
-     *             pathname: '/threads',
-     *             state: { detail: response.data.threadName }
-     *         })
-     *     }
-     *     ).catch(
-     *         this.setState({
-     *             serviceError: true,
-     *             message: 'Oops something went wrong with the Open Thread service'
-     *         })
-     */
-
-    //     )
   }
 
   render() {

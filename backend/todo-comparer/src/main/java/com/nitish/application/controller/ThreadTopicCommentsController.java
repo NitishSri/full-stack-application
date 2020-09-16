@@ -4,12 +4,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nitish.application.resourceobject.DeleteCommentRO;
+import com.nitish.application.resourceobject.PostCommentRO;
 import com.nitish.application.resourceobject.ThreadComments;
 import com.nitish.application.service.ThreadTopicCommentsService;
 
@@ -26,8 +29,14 @@ public class ThreadTopicCommentsController {
 	}
 
 	@PostMapping(path = "/post/comment", consumes = "application/json", produces = "application/json")
-	public String postComment(@Valid @RequestBody ThreadComments comments) {
-		return service.postComment(comments);
+	public String postComment(@Valid @RequestBody PostCommentRO comment) {
+		return service.postComment(comment);
+
+	}
+
+	@DeleteMapping(path = "/delete/comment", consumes = "application/json", produces = "application/json")
+	public String deleteComment(@Valid @RequestBody DeleteCommentRO comment) {
+		return service.deleteComment(comment);
 
 	}
 

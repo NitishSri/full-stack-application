@@ -2,9 +2,13 @@ package com.nitish.application.resourceobject;
 
 public class CommentsRO {
 	private String commentAuthor;
-	private String comment;
-	private int like;
-	private int dislike;
+	private String commentOne;
+	private String commentTwo;
+	private String threadName;
+	private String commentID;
+	private int commentLike;
+	private int commentDislike;
+	private Object id;
 
 	public String getCommentAuthor() {
 		return commentAuthor;
@@ -14,28 +18,60 @@ public class CommentsRO {
 		this.commentAuthor = commentAuthor;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getCommentOne() {
+		return commentOne;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setCommentOne(String commentOne) {
+		this.commentOne = commentOne;
 	}
 
-	public int getLike() {
-		return like;
+	public String getCommentTwo() {
+		return commentTwo;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setCommentTwo(String commentTwo) {
+		this.commentTwo = commentTwo;
 	}
 
-	public int getDislike() {
-		return dislike;
+	public String getThreadName() {
+		return threadName;
 	}
 
-	public void setDislike(int dislike) {
-		this.dislike = dislike;
+	public void setThreadName(String threadName) {
+		this.threadName = threadName;
+	}
+
+	public String getCommentID() {
+		return commentID;
+	}
+
+	public void setCommentID(String commentID) {
+		this.commentID = commentID;
+	}
+
+	public int getCommentLike() {
+		return commentLike;
+	}
+
+	public void setCommentLike(int commentLike) {
+		this.commentLike = commentLike;
+	}
+
+	public int getCommentDislike() {
+		return commentDislike;
+	}
+
+	public void setCommentDislike(int commentDislike) {
+		this.commentDislike = commentDislike;
+	}
+
+	public Object getId() {
+		return id;
+	}
+
+	public void setId(Object id) {
+		this.id = id;
 	}
 
 }

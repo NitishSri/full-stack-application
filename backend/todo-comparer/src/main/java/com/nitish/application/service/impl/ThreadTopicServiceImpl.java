@@ -11,8 +11,6 @@ import com.nitish.application.entity.ThreadAuthorMapping;
 import com.nitish.application.repository.ThreadAuthorMappingRepository;
 import com.nitish.application.resourceobject.NewThreadRequestRO;
 import com.nitish.application.resourceobject.SearchThreadResponseRO;
-import com.nitish.application.resourceobject.ThreadCommentTopicOneRO;
-import com.nitish.application.resourceobject.ThreadCommentTopicTwoRO;
 import com.nitish.application.resourceobject.ThreadComments;
 import com.nitish.application.service.ThreadTopicService;
 
@@ -30,33 +28,24 @@ public class ThreadTopicServiceImpl implements ThreadTopicService {
 		ThreadComments response = new ThreadComments();
 		String threadName = request.getTopicOne().trim().toLowerCase() + "_"
 				+ request.getTopicTwo().trim().toLowerCase();
-
+		String displayName = "Comparison between " + request.getTopicOne().trim().toUpperCase() + " and "
+				+ request.getTopicTwo().trim().toUpperCase();
 		ThreadAuthorMapping entity = new ThreadAuthorMapping();
 		entity.setAuthorUsername(request.getAuthorUsername());
 		entity.setThreadTopicName(threadName);
 		entity.setTopicOne(request.getTopicOne());
 		entity.setTopicTwo(request.getTopicTwo());
+		entity.setDisplayName(displayName);
+		entity.setTotalComments(0);
 		repository.save(entity);
 
 		mongoTemplate.createCollection(threadName);
 		response.setThreadAuthorName(request.getAuthorUsername());
-		response.setThreadDisplayName("Comparison between " + request.getTopicOne().trim().toUpperCase() + " and "
-				+ request.getTopicTwo().trim().toUpperCase());
+		response.setThreadDisplayName(displayName);
 		response.setNewThread(true);
 		response.setThreadName(threadName);
-		ThreadCommentTopicOneRO topicOne = new ThreadCommentTopicOneRO();
-		topicOne.setName(request.getTopicOne().toUpperCase());
-		topicOne.setComments(null);
-
-		ThreadCommentTopicTwoRO topicTwo = new ThreadCommentTopicTwoRO();
-		topicTwo.setName(request.getTopicTwo().toUpperCase());
-		topicTwo.setComments(null);
-
-		response.setTopicOne(topicOne);
-		response.setTopicTwo(topicTwo);
-
-		response.setTopicOne(topicOne);
-
+		response.setTopicOne(request.getTopicOne());
+		response.setTopicTwo(request.getTopicTwo());
 		return response;
 	}
 

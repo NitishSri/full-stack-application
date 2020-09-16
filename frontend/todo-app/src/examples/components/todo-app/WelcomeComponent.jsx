@@ -55,12 +55,13 @@ class WelcomeComponent extends Component {
 
   handleError(error) {
     if (error.message) {
-      errorMessage += error.message;
+      this.state.errorMessage += error.message;
     }
 
     if (error.response.data) {
-      errorMessage += error.response.data.message;
+      this.state.errorMessage += error.response.data.message;
     }
+    
     this.setState({
       errorMessage: error.response.data.message,
 
