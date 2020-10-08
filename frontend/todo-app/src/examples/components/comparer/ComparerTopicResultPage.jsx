@@ -52,7 +52,8 @@ class ComparerTopicResultPage extends Component {
 
   componentDidMount() {
     const { threadName } = this.props.location.state;
-    ComparerThreadService.openThread(threadName)
+    const loggedUser = sessionStorage.getItem('authenticatedUser');
+    ComparerThreadService.openThread(threadName, loggedUser)
       .then((response) => {
         this.setState({
           responseData: response.data,
@@ -86,7 +87,6 @@ class ComparerTopicResultPage extends Component {
         serviceError: true,
         message: 'Oops something went wrong with the Like Comment service',
       }));
-
   }
 
   dislikeComment = (loggedUser, threadName, commentID) => {
@@ -99,7 +99,6 @@ class ComparerTopicResultPage extends Component {
         serviceError: true,
         message: 'Oops something went wrong with the Dislike Comment service',
       }));
-
   }
 
   render() {
@@ -119,11 +118,38 @@ class ComparerTopicResultPage extends Component {
         } else {
           sameUser = false;
         }
+
         const { threadName } = this.state.responseData.comments[i];
         const { commentID } = this.state.responseData.comments[i];
         const { commentLike } = this.state.responseData.comments[i];
         const { commentDislike } = this.state.responseData.comments[i];
-        commentTopicOne.push(<div><a href='' onClick={() => this.likeComment(loggedUser, threadName, commentID)}>Like ({commentLike})</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='' onClick={() => this.dislikeComment(loggedUser, threadName, commentID)}>Dislike ({commentDislike})</a>&nbsp;&nbsp;&nbsp;&nbsp;{sameUser && <a href='' onClick={() => this.deleteComment(threadName, commentID)}>Delete</a>}<textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea></div>);
+        let commentLiked = false;
+        let commentDisliked = false;
+
+        if (null !== this.state.responseData.userLikedDislikedComments && null !== this.state.responseData.userLikedDislikedComments.likeComment) {
+          for (var j = 0; j < this.state.responseData.userLikedDislikedComments.likedComments.length; j++) {
+            if (commentID === this.state.responseData.userLikedDislikedComments.likedComments[j]) {
+              commentLiked = true;
+              break;
+            }
+          }
+        }
+
+        if (null !== this.state.responseData.userLikedDislikedComments && null !== this.state.responseData.userLikedDislikedComments.dislikedComments) {
+          for (var j = 0; j < this.state.responseData.userLikedDislikedComments.dislikedComments.length; j++) {
+            if (commentID === this.state.responseData.userLikedDislikedComments.dislikedComments[j]) {
+              commentDisliked = true;
+              break;
+            }
+          }
+        }
+
+
+
+
+
+
+        commentTopicOne.push(<div><a href='' className={commentLiked ? 'greenlink' : ''} onClick={() => this.likeComment(loggedUser, threadName, commentID)}>Like ({commentLike})</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='' className={commentDisliked ? 'greenlink' : ''} onClick={() => this.dislikeComment(loggedUser, threadName, commentID)}>Dislike ({commentDislike})</a>&nbsp;&nbsp;&nbsp;&nbsp;{sameUser && <a href='' onClick={() => this.deleteComment(threadName, commentID)}>Delete</a>}<textarea className="un" name="commentsOne" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentOne)}</textarea></div>);
         commentTopicTwo.push(<div><textarea className="un" name="commentsTwo" disabled rows="1" cols="20">{JSON.stringify(this.state.responseData.comments[i].commentTwo)}</textarea></div>);
       }
     }

@@ -24,3 +24,9 @@
   height: 60vh;
   overflow:scroll
 }
+
+.greenlink {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}

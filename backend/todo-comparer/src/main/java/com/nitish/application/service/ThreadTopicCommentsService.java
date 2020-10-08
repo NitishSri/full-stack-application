@@ -5,7 +5,7 @@ import com.nitish.application.resourceobject.ThreadComments;
 
 public interface ThreadTopicCommentsService {
 	
-	public ThreadComments fetchThreadComments(String threadName);
+	public ThreadComments fetchThreadComments(String threadName, String loggedInUser);
 	
 	public String postComment(PostCommentRO comment);
 	

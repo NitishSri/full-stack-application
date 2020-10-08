@@ -9,8 +9,8 @@ class ComparerThreadService {
     return axios.post('http://localhost:9093/create/thread', threadDetails);
   }
 
-  openThread(threadName) {
-    return axios.get(`http://localhost:9093/thread/${threadName}`);
+  openThread(threadName, loggedInUser) {
+    return axios.get(`http://localhost:9093/thread/${threadName}/${loggedInUser}`);
   }
 
   postComment(threadComments) {

@@ -11,6 +11,7 @@ public class ThreadComments {
 	private List<CommentsRO> comments;
 	private String topicOne;
 	private String topicTwo;
+	private UserLikedDislikedComments userLikedDislikedComments;
 
 	public String getThreadName() {
 		return threadName;
@@ -66,6 +67,14 @@ public class ThreadComments {
 
 	public void setTopicTwo(String topicTwo) {
 		this.topicTwo = topicTwo;
+	}
+
+	public UserLikedDislikedComments getUserLikedDislikedComments() {
+		return userLikedDislikedComments;
+	}
+
+	public void setUserLikedDislikedComments(UserLikedDislikedComments userLikedDislikedComments) {
+		this.userLikedDislikedComments = userLikedDislikedComments;
 	}
 
 }

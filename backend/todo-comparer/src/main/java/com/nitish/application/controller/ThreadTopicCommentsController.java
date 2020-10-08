@@ -23,9 +23,9 @@ public class ThreadTopicCommentsController {
 	@Autowired
 	ThreadTopicCommentsService service;
 
-	@GetMapping(path = "/thread/{threadName}", produces = "application/json")
-	public ThreadComments fetchThreadComments(@PathVariable String threadName) {
-		return service.fetchThreadComments(threadName);
+	@GetMapping(path = "/thread/{threadName}/{user}", produces = "application/json")
+	public ThreadComments fetchThreadComments(@PathVariable String threadName, @PathVariable String user) {
+		return service.fetchThreadComments(threadName, user);
 	}
 
 	@PostMapping(path = "/post/comment", consumes = "application/json", produces = "application/json")
@@ -53,5 +53,5 @@ public class ThreadTopicCommentsController {
 		return service.dislikeComment(threadName, commentID, author);
 
 	}
-
+	
 }
